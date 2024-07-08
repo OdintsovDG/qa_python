@@ -53,12 +53,16 @@ class TestBooksCollector:
         collector = prepare_books_collector
         assert collector.get_books_for_children() == ['Ревизор']
 
-    def test_add_book_in_favorites_add_two_book(self, prepare_favorites_books_collector):
-        collector = prepare_favorites_books_collector
+    def test_add_book_in_favorites_add_two_book(self, prepare_books_collector):
+        collector = prepare_books_collector
+        collector.add_book_in_favorites('Туман')
+        collector.add_book_in_favorites('Ревизор')
         assert len(collector.favorites) == 2
 
-    def test_delete_book_from_favorites_del_one_book(self, prepare_favorites_books_collector):
-        collector = prepare_favorites_books_collector
+    def test_delete_book_from_favorites_del_one_book(self, prepare_books_collector):
+        collector = prepare_books_collector
+        collector.add_book_in_favorites('Туман')
+        collector.add_book_in_favorites('Ревизор')
         collector.delete_book_from_favorites('Туман')
         assert len(collector.favorites) == 1
 
